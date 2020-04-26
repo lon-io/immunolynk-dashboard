@@ -40,12 +40,16 @@ const StyledPanelWrapper = styled(FlexContainer)`
   position: fixed;
   left: 0;
   height: 100vh;
-  right: 0;
+  // right: 0;
   padding-top: 10px;
   background-color: ${({ theme }) => theme.colors.primary};
   z-index: 10;
 
+  // Todo: remove
+  display: none;
+
   ${respondTo.sm`
+    display: flex;
     width: 20%;
     padding-top: 10px;
   `}
@@ -55,8 +59,11 @@ const StyledPanelContainer = styled.div``;
 
 const StyledDashboardContent = styled.div`
   position: relative;
-  width: 80%;
-  left: 20%;
+
+  ${respondTo.sm`
+    width: 80%;
+    left: 20%;
+  `}
 `;
 
 export interface DashboardContainerProps {

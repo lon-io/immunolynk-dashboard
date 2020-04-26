@@ -5,6 +5,7 @@ import { defaultTheme } from './styleguide/theme';
 import './index.css';
 import { PageRoutes } from './config/routes';
 import Login from './pages/Login';
+import SignUp from './pages/Signup';
 import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Profiles from './pages/Profiles';
@@ -24,6 +25,9 @@ const App = () => {
           </Route>
           <Route exact path={PageRoutes.Login}>
             <Login />
+          </Route>
+          <Route exact path={PageRoutes.SignUp}>
+            <SignUp />
           </Route>
           <Route path={PageRoutes.Dashboard}>
             <Dashboard />

@@ -52,9 +52,11 @@ const AppChart: React.FC<ChartProps> = ({ domId, labels, datasets, title, height
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      initializeChart();
-    }, 1000);
+    const chart = initializeChart();
+
+    return () => {
+      chart.unbindWindowEvents();
+    };
   }, [title]);
 
   return <StyledChartWrapper id={domId} />;

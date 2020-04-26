@@ -19,7 +19,7 @@
     "@types/styled-components": "^5.1.0",
     "@types/styled-system": "^5.1.9",
     "express": "^4.17.1",
-    "frappe-charts": "^1.2.4",
+    "frappe-charts": "1.2.4",
     "ignore-styles": "^5.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

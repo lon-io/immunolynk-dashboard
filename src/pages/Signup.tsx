@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Container, FlexContainer } from '../styleguide/styleguide.stories';
-import NavBar from '../components/NavBar';
+// import NavBar from '../components/NavBar';
 import Logo from '../components/Logo';
+import Input from '../components/Input';
 import BorderedButton, { FilledButton } from '../components/Button';
 import styled from 'styled-components';
 import manImageUrl from '../assets/images/man.png';
@@ -12,7 +13,7 @@ import { PageRoutes } from '../config/routes';
 import { Typography } from '../styleguide/Typography';
 const { H1 } = Typography;
 
-const navItems = ['Dashboard', 'Profiles', 'Search', 'Settings'];
+// const navItems = ['Dashboard', 'Profiles', 'Search', 'Settings'];
 
 const StyledPageContainer = styled(Container)``;
 
@@ -47,7 +48,8 @@ const StyledImageContentContainer = styled(FlexContainer)`
   `}
 `;
 
-const StyledButtonContainer = styled(FlexContainer)`
+const StyledForm = styled.form`
+  display: flex;
   flex-direction: column;
 `;
 
@@ -86,7 +88,7 @@ const StyledYLogo = styled.img`
   `}
 `;
 
-const Landing = () => {
+const LoginPage = () => {
   const history = useHistory();
 
   return (
@@ -96,10 +98,11 @@ const Landing = () => {
         <StyledLeftContentContainer>
           <StyledLogo />
           <StyledHeading>Welcome to Immunolynk!</StyledHeading>
-          <StyledButtonContainer>
-            <BorderedButton onClick={() => history.push(PageRoutes.SignUp)}>Sign Up</BorderedButton>
-            <FilledButton onClick={() => history.push(PageRoutes.Login)}>Log In</FilledButton>
-          </StyledButtonContainer>
+          <StyledForm>
+            <Input id="email" name="email" placeholder="Email" type="email" required />
+            <Input name="password" placeholder="Password" type="password" required />
+            <FilledButton onClick={() => history.push(PageRoutes.Dashboard)}>Sign Up</FilledButton>
+          </StyledForm>
         </StyledLeftContentContainer>
         <StyledImageContentContainer>
           <StyledManImage src={manImageUrl} />
@@ -110,4 +113,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default LoginPage;
