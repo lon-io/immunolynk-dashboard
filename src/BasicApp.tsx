@@ -5,6 +5,7 @@ import { defaultTheme } from './styleguide/theme';
 import './index.css';
 import { PageRoutes } from './config/routes';
 import Login from './pages/Login';
+import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Profiles from './pages/Profiles';
 import Search from './pages/Search';
@@ -15,6 +16,9 @@ const App = () => {
     <ThemeProvider theme={defaultTheme}>
       <>
         <Switch>
+          <Route exact path={PageRoutes.Home}>
+            <Landing />
+          </Route>
           <Route exact path={PageRoutes.Home}>
             <Login />
           </Route>

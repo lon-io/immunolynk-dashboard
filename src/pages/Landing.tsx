@@ -1,105 +1,113 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Container, FlexContainer } from '../styleguide/styleguide.stories';
+import NavBar from '../components/NavBar';
+import Logo from '../components/Logo';
+import BorderedButton, { FilledButton } from '../components/Button';
 import styled from 'styled-components';
+import manImageUrl from '../assets/images/man.png';
+import logoYImageUrl from '../assets/images/logo-y.png';
+import { respondTo } from '../styleguide/breakpoints';
+import { PageRoutes } from '../config/routes';
 import { Typography } from '../styleguide/Typography';
-import { colors } from '../styleguide/colors';
-import { breakpoints } from '../styleguide/theme';
-import { space } from '../styleguide/space';
+const { H1 } = Typography;
 
-const { H1, H2, H3, H4, H5, LargeLead, Link, Paragraph, SmallLead, SmallParagraph } = Typography;
+const navItems = ['Dashboard', 'Profiles', 'Search', 'Settings'];
 
-const Divider = styled.div`
-  border: 1px solid #00000022;
-  width: 100%;
-  margin: ${({ theme }) => theme.space.M}px;
+const StyledPageContainer = styled(Container)``;
+
+const StyledContentContainer = styled(FlexContainer)`
+  flex-direction: row;
+  padding: 10px;
+
+  ${respondTo.sm`
+    padding: 40px;
+    > div {
+      width: 50%;
+    }
+  `}
 `;
 
-const ColorCircle = styled.div<{ color: string }>`
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  background-color: ${({ color }) => color};
+const StyledHeading = styled(H1)`
+  padding: 10px;
 `;
 
-const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: 150px 150px 150px;
-  margin: ${({ theme }) => theme.space.M}px;
+const StyledLeftContentContainer = styled(FlexContainer)`
+  flex-direction: column;
 `;
 
-const FlexContainer = styled.div`
-  display: flex;
+const StyledImageContentContainer = styled(FlexContainer)`
+  display: none;
+
+  ${respondTo.sm`
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+    display: flex;
+  `}
 `;
 
-const Container = styled.div`
-  background-color: white;
-  height: 100vh;
-  padding: 16px;
+const StyledButtonContainer = styled(FlexContainer)`
+  flex-direction: column;
 `;
 
-const LandingPage = () => {
+const StyledLogo = styled(Logo)`
+  top: 200;
+  align-self: center;
+  opacity: 0;
+
+  ${respondTo.sm`
+    align-self: flex-start;
+  `}
+`;
+
+const StyledManImage = styled.img`
+  position: absolute;
+  left: 50px;
+  top: 0;
+  width: 60%;
+  max-width: 500px;
+
+  ${respondTo.md`
+    width: 50%;
+  `}
+`;
+
+const StyledYLogo = styled.img`
+  display: none;
+  opacity: 0.1;
+  position: relative;
+  top: 60px;
+  right: 50px;
+
+  ${respondTo.md`
+    display: block;
+    width: 50%;
+  `}
+`;
+
+const Landing = () => {
+  const history = useHistory();
+
   return (
-    <Container>
-      <H2>Typography</H2>
-      <Divider />
-      <H1>H1: Animi aperiam, aspernatur culpa deserunt eaque, eius explicabo inventore ipsa laudantium</H1>
-      <H2>H2: Consectetur consequuntur cum deserunt dignissimos esse fugiat inventore iusto, laboriosam maiores minima!.</H2>
-      <H3>H3: Culpa dignissimos expedita facilis, fugiat minus odio reiciendis ut? Accusamus delectus dicta eius.</H3>
-      <H4>H4: Accusamus ad adipisci alias aliquam aperiam autem, culpa dolorem enim error est eum.</H4>
-      <H5>H5: Debitis distinctio dolorum fugiat impedit itaque necessitatibus, quo sunt? Atque consectetur, corporis.</H5>
-      <LargeLead>LargeLead:Deleniti est facere id placeat provident sapiente totam vitae. Asperiores consequuntur eaque eum.</LargeLead>
-      <SmallLead>SmallLead: At aut corporis culpa doloribus ea enim error est impedit, ipsum iure maxime molestiae omnis optio.</SmallLead>
-      <Paragraph>
-        Paragraph: Facilis hic iste perspiciatis qui quibusdam sint velit vero Animi doloremque esse ex iure perferendis.
-      </Paragraph>
-      <SmallParagraph>SmallParagraph: Ad animi at debitis eligendi explicabo facere illum inventore, ipsum minus obcaecati.</SmallParagraph>
-      <Link to="/">Link: Lorem ipsum dolor sit amet, consectetur adipisicing elit.</Link>
-      <Divider />
-      <H2>Colors</H2>
-      <Paragraph>These colors are defined in styleguide colors.ts.</Paragraph>
-      <Divider />
-      <GridContainer>
-        <div>
-          <SmallParagraph>Kind</SmallParagraph>
-        </div>
-        <div>
-          <SmallParagraph>HEX</SmallParagraph>
-        </div>
-        <div>
-          <SmallParagraph>Color</SmallParagraph>
-        </div>
-      </GridContainer>
-      {Object.entries(colors).map((obj) => (
-        <GridContainer key={obj[0]}>
-          <SmallParagraph>{obj[0]}</SmallParagraph>
-          <SmallParagraph>{obj[1]}</SmallParagraph>
-          <ColorCircle color={obj[1]} />
-        </GridContainer>
-      ))}
-      <Divider />
-      <H2>Breakpoints</H2>
-      <Paragraph>These are the responsive breakpoints being used</Paragraph>
-      <br />
-      <FlexContainer>
-        {breakpoints.map((key: string) => (
-          <SmallParagraph key={key} m={4}>
-            {key}
-          </SmallParagraph>
-        ))}
-      </FlexContainer>
-      <Divider />
-      <H2>Space</H2>
-      <FlexContainer>
-        {Object.entries(space).map((obj) => (
-          <div key={obj[0]}>
-            <SmallParagraph m={2}>
-              <strong>{obj[1]}px</strong>
-            </SmallParagraph>
-            <SmallParagraph m={2}>{obj[0]}</SmallParagraph>
-          </div>
-        ))}
-      </FlexContainer>
-    </Container>
+    <StyledPageContainer>
+      {/* <NavBar items={navItems}></NavBar> */}
+      <StyledContentContainer>
+        <StyledLeftContentContainer>
+          <StyledLogo />
+          <StyledHeading>Welcome to Immunolynk!</StyledHeading>
+          <StyledButtonContainer>
+            <BorderedButton onClick={() => history.push(PageRoutes.Dashboard)}>Sign Up</BorderedButton>
+            <FilledButton onClick={() => history.push(PageRoutes.Dashboard)}>Log In</FilledButton>
+          </StyledButtonContainer>
+        </StyledLeftContentContainer>
+        <StyledImageContentContainer>
+          <StyledManImage src={manImageUrl} />
+          <StyledYLogo src={logoYImageUrl} />
+        </StyledImageContentContainer>
+      </StyledContentContainer>
+    </StyledPageContainer>
   );
 };
 
-export default LandingPage;
+export default Landing;
