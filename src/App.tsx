@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Router, Switch, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { createBrowserHistory } from 'history';
+import { defaultTheme } from './styleguide/theme';
+// import LandingPage from './pages/Landing';
+import LoginPage from './pages/Login';
+import './index.css';
 
-function App() {
+const history = createBrowserHistory();
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <Router history={history}>
+        <>
+          <Switch>
+            <Route exact path="/">
+              <LoginPage />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+          </Switch>
+          {/* <LandingPage /> */}
+        </>
+      </Router>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
