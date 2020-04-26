@@ -5,9 +5,8 @@ import { Typography } from '../styleguide/Typography';
 import { FlexContainer } from '../styleguide/styleguide.stories';
 import { colors } from '../styleguide/colors';
 import loadable from '@loadable/component';
-//
 const { H1 } = Typography;
-// const Chart = React.lazy(() => import('../components/Chart'));
+
 // This dynamic import will not be processed server-side
 const Chart = loadable(() => import('../components/Chart'), { ssr: false });
 
