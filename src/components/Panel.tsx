@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { PageRoutes } from '../config/routes';
 import styled from 'styled-components';
 import { respondTo } from '../styleguide/breakpoints';
@@ -14,7 +14,7 @@ export interface PanelItem {
 
 const StyledPanelContainer = styled.div``;
 
-const StyledPanelItem = styled.li`
+const StyledPanelItem = styled.li<{ isActive: boolean }>`
   list-style: none;
 
   a {
@@ -23,6 +23,7 @@ const StyledPanelItem = styled.li`
 
   p {
     color: white;
+    ${({ isActive }) => (isActive ? `font-weight: 800;` : '')}
   }
 `;
 
@@ -31,18 +32,27 @@ const StyledPanelItemsList = styled.ul`
   flex-direction: column;
 `;
 
-const Panel: FC<{ items: PanelItem[] }> = ({ items }) => (
-  <StyledPanelContainer>
-    <StyledPanelItemsList>
-      {Object.entries(items).map(([itemKey, { route, label }]) => (
-        <StyledPanelItem key={itemKey}>
-          <Link to={route}>
-            <Paragraph>{label}</Paragraph>
-          </Link>
-        </StyledPanelItem>
-      ))}
-    </StyledPanelItemsList>
-  </StyledPanelContainer>
-);
+export interface PanelProps {
+  items: PanelItem[];
+}
+
+const Panel: FC<PanelProps> = ({ items }) => {
+  const history = useHistory();
+  const currentUrl = history.location.pathname;
+
+  return (
+    <StyledPanelContainer>
+      <StyledPanelItemsList>
+        {Object.entries(items).map(([itemKey, { route, label }]) => (
+          <StyledPanelItem key={itemKey} isActive={currentUrl === route}>
+            <Link to={route}>
+              <Paragraph>{label}</Paragraph>
+            </Link>
+          </StyledPanelItem>
+        ))}
+      </StyledPanelItemsList>
+    </StyledPanelContainer>
+  );
+};
 
 export default Panel;

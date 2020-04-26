@@ -63,21 +63,23 @@ export interface DashboardContainerProps {
   activeItem?: keyof typeof DashboardPanelItems;
 }
 
-const DashboardContainer: FC<DashboardContainerProps> = ({ activeItem = 'dashboard', children }) => (
-  <StyledDashboard>
-    <StyledBurgerMenuContainer>
-      <BurgerMenuIcon />
-    </StyledBurgerMenuContainer>
-    <StyledPanelWrapper>
-      <Link to={PageRoutes.Home}>
-        <Logo alternate />
-      </Link>
-      <StyledPanelContainer>
-        <Panel items={Object.values(DashboardPanelItems)} />
-      </StyledPanelContainer>
-    </StyledPanelWrapper>
-    <StyledDashboardContent>{children}</StyledDashboardContent>
-  </StyledDashboard>
-);
+const DashboardContainer: FC<DashboardContainerProps> = ({ children }) => {
+  return (
+    <StyledDashboard>
+      <StyledBurgerMenuContainer>
+        <BurgerMenuIcon />
+      </StyledBurgerMenuContainer>
+      <StyledPanelWrapper>
+        <Link to={PageRoutes.Home}>
+          <Logo alternate />
+        </Link>
+        <StyledPanelContainer>
+          <Panel items={Object.values(DashboardPanelItems)} />
+        </StyledPanelContainer>
+      </StyledPanelWrapper>
+      <StyledDashboardContent>{children}</StyledDashboardContent>
+    </StyledDashboard>
+  );
+};
 
 export default DashboardContainer;

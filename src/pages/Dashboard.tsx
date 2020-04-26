@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import DashboardContainer from '../components/DashboardContainer';
-import Chart from '../components/Chart';
 import { Typography } from '../styleguide/Typography';
 import { FlexContainer } from '../styleguide/styleguide.stories';
 import { colors } from '../styleguide/colors';
+import loadable from '@loadable/component';
+
 const { H1 } = Typography;
+// This dynamic import will not be processed server-side
+const Chart = loadable(() => import('../components/Chart'), { ssr: false });
 
 const StyledContentWrapper = styled.div`
   padding: 20px;
@@ -108,22 +111,26 @@ const percentageImmuneData = {
   type: 'pie',
 };
 
-const Dashboard = () => (
-  <DashboardContainer activeItem="dashboard">
-    <StyledContentWrapper>
-      <StyledHeading>Hi Jhon!</StyledHeading>
-      <StyledChartsContainer>
-        <StyledChartColumn>
-          <StyledChart {...employeesTestedData}></StyledChart>
-          <StyledChart {...employeesImmuneData}></StyledChart>
-        </StyledChartColumn>
-        <StyledChartRow>
-          <StyledChart {...percentageTestedData}></StyledChart>
-          <StyledChart {...percentageImmuneData}></StyledChart>
-        </StyledChartRow>
-      </StyledChartsContainer>
-    </StyledContentWrapper>
-  </DashboardContainer>
-);
+const Dashboard = () => {
+  return null;
+
+  return (
+    <DashboardContainer activeItem="dashboard">
+      <StyledContentWrapper>
+        <StyledHeading>Hi Jhon!</StyledHeading>
+        <StyledChartsContainer>
+          <StyledChartColumn>
+            <StyledChart {...employeesTestedData}></StyledChart>
+            <StyledChart {...employeesImmuneData}></StyledChart>
+          </StyledChartColumn>
+          <StyledChartRow>
+            <StyledChart {...percentageTestedData}></StyledChart>
+            <StyledChart {...percentageImmuneData}></StyledChart>
+          </StyledChartRow>
+        </StyledChartsContainer>
+      </StyledContentWrapper>
+    </DashboardContainer>
+  );
+};
 
 export default Dashboard;

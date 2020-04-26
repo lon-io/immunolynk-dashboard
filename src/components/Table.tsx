@@ -13,7 +13,7 @@ const { Paragraph, SmallLead } = Typography;
 
 // const Table = <D extends, C>(): React.FC<TableProps<D, C>> => ({ data, columns }) => {
 const Styles = styled.div`
-  padding: 1rem;
+  padding: 40px;
 
   table {
     display: inline-block;
