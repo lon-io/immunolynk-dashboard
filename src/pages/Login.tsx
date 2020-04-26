@@ -1,13 +1,15 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, FlexContainer } from '../styleguide/styleguide.stories';
 import NavBar from '../components/NavBar';
 import Logo from '../components/Logo';
-import { Typography } from '../styleguide/Typography';
 import BorderedButton, { FilledButton } from '../components/Button';
 import styled from 'styled-components';
 import manImageUrl from '../assets/images/man.png';
 import logoYImageUrl from '../assets/images/logo-y.png';
 import { respondTo } from '../styleguide/breakpoints';
+import { PageRoutes } from '../config/routes';
+import { Typography } from '../styleguide/Typography';
 const { H1 } = Typography;
 
 const navItems = ['Dashboard', 'Profiles', 'Search', 'Settings'];
@@ -84,24 +86,28 @@ const StyledYLogo = styled.img`
   `}
 `;
 
-const LoginPage = () => (
-  <StyledPageContainer>
-    {/* <NavBar items={navItems}></NavBar> */}
-    <StyledContentContainer>
-      <StyledLeftContentContainer>
-        <StyledLogo />
-        <StyledHeading>Welcome to Immunolynk!</StyledHeading>
-        <StyledButtonContainer>
-          <BorderedButton>Sign Up</BorderedButton>
-          <FilledButton>Log In</FilledButton>
-        </StyledButtonContainer>
-      </StyledLeftContentContainer>
-      <StyledImageContentContainer>
-        <StyledManImage src={manImageUrl} />
-        <StyledYLogo src={logoYImageUrl} />
-      </StyledImageContentContainer>
-    </StyledContentContainer>
-  </StyledPageContainer>
-);
+const LoginPage = () => {
+  const history = useHistory();
+
+  return (
+    <StyledPageContainer>
+      {/* <NavBar items={navItems}></NavBar> */}
+      <StyledContentContainer>
+        <StyledLeftContentContainer>
+          <StyledLogo />
+          <StyledHeading>Welcome to Immunolynk!</StyledHeading>
+          <StyledButtonContainer>
+            <BorderedButton onClick={() => history.push(PageRoutes.Dashboard)}>Sign Up</BorderedButton>
+            <FilledButton onClick={() => history.push(PageRoutes.Dashboard)}>Log In</FilledButton>
+          </StyledButtonContainer>
+        </StyledLeftContentContainer>
+        <StyledImageContentContainer>
+          <StyledManImage src={manImageUrl} />
+          <StyledYLogo src={logoYImageUrl} />
+        </StyledImageContentContainer>
+      </StyledContentContainer>
+    </StyledPageContainer>
+  );
+};
 
 export default LoginPage;
